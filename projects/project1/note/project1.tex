@@ -1,0 +1,114 @@
+\documentclass[11pt, oneside]{article}   	% use "amsart" instead of "article" for AMSLaTeX format
+\usepackage{geometry}                		% See geometry.pdf to learn the layout options. There are lots.
+\geometry{letterpaper}                   		% ... or a4paper or a5paper or ... 
+%\geometry{landscape}                		% Activate for rotated page geometry
+%\usepackage[parfill]{parskip}    		% Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{graphicx}				% Use pdf, png, jpg, or eps§ with pdflatex; use eps in DVI mode
+								% TeX will automatically convert eps --> pdf in pdflatex		
+\usepackage{amssymb}
+\usepackage{xcolor}		
+\usepackage{float}
+ \usepackage{hyperref}
+\usepackage{lstlinebgrd}
+\usepackage{amsmath}
+%SetFonts
+\usepackage{listings}
+\usepackage{lstlinebgrd}
+%SetFonts
+\usepackage{color}
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+\lstset{style=mystyle}
+%SetFonts
+
+
+\title{Project 1: Statistical Learning}
+\author{Yapi Donatien Achou}
+%\date{}							% Activate to display a given date or no date
+
+\begin{document}
+\maketitle
+\section{Chapter 3.7, Exercice 10}
+\subsection{Fit a multiple regression model to predict \textcolor{orange}{Sales}, using \textcolor{orange}{Price}, \textcolor{orange}{Urban}, and \textcolor{orange}{US}}
+The multiple linear regression equation is given by \cite{gareth}
+\begin{equation}\label{eq:mr}
+Y = \beta_{0} + \beta_{1}X_{1} + \beta_{2}X_{2}+ \dots + \beta_{p}X_{p} + \epsilon
+\end{equation}
+where 
+$Y$ and $X_{i}, (i = 1,\dots,p$) are the response and predictors respectively, and $\beta_{i}, (i = 0,\dots,p)$ are real numbers.
+With Sales as response and Price, Urban and US as predictors, equation (\ref{eq:mr}) becomes
+\begin{equation}\label{eq:mr}
+Sales = \beta_{0} + \beta_{1}\textcolor{orange}{Price} + \beta_{2}\textcolor{orange}{Urban}+ \beta_{3}\textcolor{orange}{US}+ \epsilon
+\end{equation}
+
+\begin{lstlisting}[language=R, caption=R code to predict Sale given Price Urban and US]
+#!/usr/bin/env Rscript
+Library(ISLR)
+library(MASS)
+set.seed(1)
+predictSales <- function(){
+lm.fit = lm(Sales ~Price + Urban + US, data = Carseat)
+summary(lm.fit)
+}
+\end{lstlisting}
+Table \ref{table:mr1}
+\begin{table}[H]
+\centering
+\begin{tabular}{lll}
+\hline
+Coefficients& Estimated Std & Error \\
+\hline
+Itercept  &  13 &       0.65 \\
+Price  &   -0.054 &        0.005 \\
+Urban YES  &   -0.02 &        0.27 \\
+US YES &   1.2 &       0.26 \\
+\hline
+\end{tabular}
+\label{table:mr1}
+\caption{Summary statistics for the multiple regression model }
+\end{table}
+
+\subsection{Interpretation of each coefficient}
+
+\subsection{Equation form of the model}
+The equation form of the model is given by
+\begin{equation}\label{eq:mr}
+Sales = \beta_{0} + \beta_{1}\textcolor{orange}{Price} + \beta_{2}\textcolor{orange}{Urban}+ \beta_{3}\textcolor{orange}{US}+ \epsilon
+\end{equation}
+\medskip
+\begin{thebibliography}{9}
+\bibitem{gareth} 
+Gareth James, Daniela Witten, Trevor Hastie, Robert Tibshirani
+\textit{An Introduction to Statistical Learning with application in R}. 
+Springer Texts in Statistics, New York 2013
+
+
+
+
+
+
+ 
+\end{thebibliography}
+
+
+\end{document}  
